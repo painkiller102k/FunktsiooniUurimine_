@@ -1,0 +1,9 @@
+@model global::FunktsiooniUurimine.Models.FunktsiooniUurimine
+
+<div class="form-group">
+    <label asp-for="Valem">Funktsioon f(x)</label>
+    <input asp-for="Valem" class="form-control formula-input"
+           placeholder="Näiteks x^3 - 3*x" autocomplete="off" />
+    <span asp-validation-for="Valem" class="text-danger"></span>
+    <div class="form-text">Näited: x^2, x^3 - 3*x, sin(x), sqrt(x), 1/x</div>
+</div>

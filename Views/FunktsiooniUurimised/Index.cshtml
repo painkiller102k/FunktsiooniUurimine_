@@ -1,0 +1,90 @@
+﻿@using FunktsiooniUurimine.Models
+@model IEnumerable<FunktsiooniUurimine>
+
+@{
+    ViewData["Title"] = "Funktsioonide uurimine";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Funktsioonide uurimine</h1>
+
+    <a asp-action="Create" class="btn btn-primary">
+        Lisa uus funktsioon
+    </a>
+
+
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Funktsioone pole veel lisatud.
+    </div>
+}
+else
+{
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark"> <tr> <th>Valem</th> <th>Määramispiirkond</th> <th>Nullkohad</th> <th>Tuletis</th> <th>Kriitilised punktid</th> <th>Ekstreemumid</th> <th>Loodud aeg</th> <th>Tegevused</th> </tr> </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@item.Valem</strong>
+                        </td>
+
+                        <td>
+                            @item.Maaramispiirkond
+                        </td>
+
+                        <td>
+                            @item.Nullkohad
+                        </td>
+
+                        <td>
+                            @item.Tuletis
+                        </td>
+
+                        <td>
+                            @item.KriitilisedPunktid
+                        </td>
+
+                        <td>
+                            @item.Ekstreemumid
+                        </td>
+
+                        <td>
+                            @item.LuodudAeg.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+                        </td>
+
+                        <td>
+                            <div class="d-flex flex-column gap-1">
+                                <a asp-action="Details"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-info">
+                                    Vaata
+                                </a>
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-warning">
+                                    Muuda
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-danger">
+                                    Kustuta
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+</div>
+
+}

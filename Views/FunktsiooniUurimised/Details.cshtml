@@ -1,0 +1,587 @@
+﻿@model global::FunktsiooniUurimine.Models.FunktsiooniUurimine
+
+@{
+    ViewData["Title"] = "Funktsiooni detailid";
+}
+
+<div class="details-container">
+
+    <div class="page-header">
+
+        <div>
+
+            <div class="small-label">
+                FUNKTSIOON
+            </div>
+
+            <h1>Funktsiooni uurimine</h1>
+
+            <p class="function-formula">
+                f(x) = @Model.Valem
+            </p>
+
+        </div>
+
+        <div class="header-actions">
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.Id"
+               class="btn-primary-custom">
+                Muuda
+            </a>
+
+            <a asp-action="Delete"
+               asp-route-id="@Model.Id"
+               class="btn-danger-custom">
+                Kustuta
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="results-grid">
+
+        <div class="result-card">
+
+            <div class="result-icon">
+                D
+            </div>
+
+            <div>
+
+                <div class="result-title">
+                    Määramispiirkond
+                </div>
+
+                <div class="result-value">
+                    @Model.Maaramispiirkond
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-card">
+
+            <div class="result-icon">
+                x
+            </div>
+
+            <div>
+
+                <div class="result-title">
+                    Nullkohad
+                </div>
+
+                <div class="result-value">
+                    @Model.Nullkohad
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-card">
+
+            <div class="result-icon">
+                f′
+            </div>
+
+            <div>
+
+                <div class="result-title">
+                    Tuletis
+                </div>
+
+                <div class="result-value">
+                    f'(x) = @Model.Tuletis
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-card">
+
+            <div class="result-icon">
+                ±
+            </div>
+
+            <div>
+
+                <div class="result-title">
+                    Kriitilised punktid
+                </div>
+
+                <div class="result-value">
+                    @Model.KriitilisedPunktid
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-card result-card-wide">
+
+            <div class="result-icon">
+                ↕
+            </div>
+
+            <div>
+
+                <div class="result-title">
+                    Ekstreemumid
+                </div>
+
+                <div class="result-value">
+                    @Model.Ekstreemumid
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="graph-card">
+
+        <div class="graph-header">
+
+            <div class="small-label">
+                GRAAFIK
+            </div>
+
+            <h2>
+                Funktsioon ja tuletis
+            </h2>
+
+            <p>
+                Graafikul on näidatud funktsioon
+                <strong>f(x)</strong> ja selle tuletis
+                <strong>f′(x)</strong>.
+            </p>
+
+        </div>
+
+
+        <div class="graph-container">
+
+            <canvas id="funktsiooniGraafik"></canvas>
+
+        </div>
+
+    </div>
+
+
+    <div class="bottom-actions">
+
+        <a asp-action="Edit"
+           asp-route-id="@Model.Id"
+           class="btn-primary-custom">
+            Muuda funktsiooni
+        </a>
+
+        <a asp-action="Index"
+           class="btn-secondary-custom">
+            Tagasi nimekirja
+        </a>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+    <script>
+
+        const xVaartused =
+            @Html.Raw(ViewBag.XVaartused);
+
+        const funktsiooniPunktid =
+            @Html.Raw(ViewBag.FunktsiooniPunktid);
+
+        const tuletisePunktid =
+            @Html.Raw(ViewBag.TuletisePunktid);
+
+
+        const ctx =
+            document.getElementById('funktsiooniGraafik');
+
+
+        if (ctx && typeof Chart !== 'undefined') {
+
+            new Chart(ctx, {
+
+                type: 'line',
+
+                data: {
+
+                    labels: xVaartused,
+
+                    datasets: [
+
+                        {
+                            label: 'f(x)',
+
+                            borderColor: '#16796e',
+
+                            data: funktsiooniPunktid,
+
+                            borderWidth: 2.5,
+
+                            pointRadius: 0,
+
+                            tension: 0.1,
+
+                            spanGaps: false
+                        },
+
+                        {
+                            label: "f'(x)",
+
+                            borderColor: '#d2644d',
+
+                            data: tuletisePunktid,
+
+                            borderWidth: 2,
+
+                            borderDash: [7, 5],
+
+                            pointRadius: 0,
+
+                            tension: 0.1,
+
+                            spanGaps: false
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    interaction: {
+
+                        mode: 'index',
+
+                        intersect: false
+
+                    },
+
+
+                    plugins: {
+
+                        legend: {
+
+                            display: true,
+
+                            position: 'top'
+
+                        },
+
+                        tooltip: {
+
+                            enabled: true
+
+                        }
+
+                    },
+
+
+                    scales: {
+
+                        x: {
+
+                            title: {
+
+                                display: true,
+
+                                text: 'x'
+
+                            },
+
+                            ticks: {
+
+                                maxTicksLimit: 11
+
+                            }
+
+                        },
+
+
+                        y: {
+
+                            title: {
+
+                                display: true,
+
+                                text: 'y'
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+        }
+
+    </script>
+
+}
+
+
+<style>
+
+    .details-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px 60px;
+    }
+
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+
+    .small-label {
+        color: #0d6efd;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        margin-bottom: 7px;
+    }
+
+
+    .page-header h1 {
+        margin: 0;
+        font-size: 34px;
+        font-weight: 700;
+    }
+
+
+    .function-formula {
+        margin: 10px 0 0;
+        color: #6c757d;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+
+    .header-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+
+    .btn-primary-custom,
+    .btn-secondary-custom,
+    .btn-danger-custom {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        padding: 10px 17px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: 0.2s;
+        border: none;
+    }
+
+
+    .btn-primary-custom {
+        background: #0d6efd;
+        color: white;
+    }
+
+
+        .btn-primary-custom:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+
+
+    .btn-secondary-custom {
+        background: #6c757d;
+        color: white;
+    }
+
+
+        .btn-secondary-custom:hover {
+            background: #5c636a;
+            color: white;
+        }
+
+
+    .btn-danger-custom {
+        background: #dc3545;
+        color: white;
+    }
+
+
+        .btn-danger-custom:hover {
+            background: #bb2d3b;
+            color: white;
+        }
+
+
+    .results-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+
+    .result-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 13px;
+        padding: 20px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+    }
+
+
+    .result-card-wide {
+        grid-column: 1 / -1;
+    }
+
+
+    .result-icon {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        border-radius: 10px;
+        background: #e7f1ff;
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+
+    .result-title {
+        color: #6c757d;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+
+    .result-value {
+        font-size: 16px;
+        font-weight: 600;
+        color: #212529;
+        line-height: 1.5;
+        word-break: break-word;
+    }
+
+
+    .graph-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+
+    .graph-header {
+        margin-bottom: 20px;
+    }
+
+
+        .graph-header h2 {
+            margin: 0;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+
+        .graph-header p {
+            margin: 7px 0 0;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+
+    .graph-container {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+
+        .graph-container canvas {
+            width: 100% !important;
+        }
+
+
+    .bottom-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+
+
+    @@media (max-width: 800px) {
+
+        .page-header {
+            flex-direction: column;
+        }
+
+
+        .results-grid {
+            grid-template-columns: 1fr;
+        }
+
+
+        .result-card-wide {
+            grid-column: auto;
+        }
+    }
+
+
+    @@media (max-width: 600px) {
+
+        .details-container {
+            padding: 25px 15px 40px;
+        }
+
+
+        .page-header h1 {
+            font-size: 28px;
+        }
+
+
+        .graph-card {
+            padding: 15px;
+        }
+    }
+
+</style>

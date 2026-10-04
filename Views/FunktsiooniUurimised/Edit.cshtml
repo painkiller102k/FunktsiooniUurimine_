@@ -1,0 +1,29 @@
+﻿@model global::FunktsiooniUurimine.Models.FunktsiooniUurimine
+
+@{
+    ViewData["Title"] = "Muuda funktsiooni";
+}
+
+<section class="formula-page">
+    <h1>Muuda funktsiooni</h1>
+    <p>Salvestamisel arvutatakse funktsiooni omadused uuesti.</p>
+
+    <div class="formula-panel">
+        <p class="formula-current">Praegune valem: <strong>f(x) = @Model.Valem</strong></p>
+
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <partial name="_FormulaEditor" model="Model" />
+
+            <div class="formula-actions">
+                <button class="btn btn-primary" type="submit">Salvesta</button>
+                <a class="btn btn-light" asp-action="Details" asp-route-id="@Model.Id">Tühista</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
