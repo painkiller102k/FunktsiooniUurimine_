@@ -228,4 +228,5 @@
 /Users/martin/Downloads/FunktsiooniUurimine-master/FunktsiooniUurimine/obj/Debug/net10.0/FunktsiooniUurimine.pdb
 /Users/martin/Downloads/FunktsiooniUurimine-master/FunktsiooniUurimine/obj/Debug/net10.0/FunktsiooniUurimine.genruntimeconfig.cache
 /Users/martin/Downloads/FunktsiooniUurimine-master/FunktsiooniUurimine/obj/Debug/net10.0/ref/FunktsiooniUurimine.dll
-/Users/martin/Downloads/FunktsiooniUurimine-master/FunktsiooniUurimine/obj/Debug/net10.0/compressed/mwd8htnota-{0}-q0rbohmvep-q0rbohmvep.gz
+/Users/martin/Downloads/FunktsiooniUurimine-master/FunktsiooniUurimine/obj/Debug/net10.0/FunktsiooniUurimine.sourcelink.json
+/Users/martin/Downloads/FunktsiooniUurimine-master/FunktsiooniUurimine/obj/Debug/net10.0/compressed/mwd8htnota-{0}-5038vz4yle-5038vz4yle.gz

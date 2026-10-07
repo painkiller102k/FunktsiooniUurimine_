@@ -231,7 +231,7 @@
                         {
                             label: 'f(x)',
 
-                            borderColor: '#16796e',
+                            borderColor: '#327d79',
 
                             data: funktsiooniPunktid,
 
@@ -247,7 +247,7 @@
                         {
                             label: "f'(x)",
 
-                            borderColor: '#d2644d',
+                            borderColor: '#c65b3d',
 
                             data: tuletisePunktid,
 
@@ -364,7 +364,7 @@
 
 
     .small-label {
-        color: #0d6efd;
+        color: var(--accent);
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 1.2px;
@@ -381,7 +381,7 @@
 
     .function-formula {
         margin: 10px 0 0;
-        color: #6c757d;
+        color: var(--muted);
         font-size: 18px;
         font-weight: 500;
     }
@@ -402,7 +402,7 @@
         justify-content: center;
         text-decoration: none;
         padding: 10px 17px;
-        border-radius: 8px;
+        border-radius: 6px;
         font-weight: 600;
         transition: 0.2s;
         border: none;
@@ -410,37 +410,37 @@
 
 
     .btn-primary-custom {
-        background: #0d6efd;
+        background: var(--accent);
         color: white;
     }
 
 
         .btn-primary-custom:hover {
-            background: #0b5ed7;
+            background: var(--accent-hover);
             color: white;
         }
 
 
     .btn-secondary-custom {
-        background: #6c757d;
+        background: var(--nav);
         color: white;
     }
 
 
         .btn-secondary-custom:hover {
-            background: #5c636a;
+            background: #3c4a58;
             color: white;
         }
 
 
     .btn-danger-custom {
-        background: #dc3545;
+        background: var(--danger);
         color: white;
     }
 
 
         .btn-danger-custom:hover {
-            background: #bb2d3b;
+            background: #96313c;
             color: white;
         }
 
@@ -457,9 +457,9 @@
         display: flex;
         align-items: flex-start;
         gap: 15px;
-        background: white;
-        border: 1px solid #e5e7eb;
-        border-radius: 13px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
         padding: 20px;
         box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
     }
@@ -475,8 +475,8 @@
         height: 44px;
         min-width: 44px;
         border-radius: 10px;
-        background: #e7f1ff;
-        color: #0d6efd;
+        background: var(--accent-soft);
+        color: var(--accent);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -486,7 +486,7 @@
 
 
     .result-title {
-        color: #6c757d;
+        color: var(--muted);
         font-size: 13px;
         font-weight: 600;
         margin-bottom: 5px;
@@ -496,7 +496,7 @@
     .result-value {
         font-size: 16px;
         font-weight: 600;
-        color: #212529;
+        color: var(--ink);
         line-height: 1.5;
         word-break: break-word;
     }
@@ -504,8 +504,8 @@
 
     .graph-card {
         background: white;
-        border: 1px solid #e5e7eb;
-        border-radius: 15px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
         padding: 25px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
@@ -525,7 +525,7 @@
 
         .graph-header p {
             margin: 7px 0 0;
-            color: #6c757d;
+            color: var(--muted);
             font-size: 14px;
         }
 
