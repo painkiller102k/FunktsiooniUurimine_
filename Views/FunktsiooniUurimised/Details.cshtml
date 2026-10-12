@@ -150,6 +150,36 @@
     </div>
 
 
+    <section class="solution-card">
+        <p class="small-label">LAHENDUS</p>
+        <h2>Funktsiooni uurimine sammhaaval</h2>
+        <ol class="solution-steps">
+            <li>
+                <strong>Määramispiirkond:</strong>
+                kontrollime, kus valem on arvutatav. Tulemus: @Model.Maaramispiirkond.
+            </li>
+            <li>
+                <strong>Nullkohad:</strong>
+                lahendame võrrandi <code>f(x) = 0</code>. Tulemus: @Model.Nullkohad.
+                <span>Nullkohti otsitakse ligikaudselt vahemikus [-10; 10].</span>
+            </li>
+            <li>
+                <strong>Tuletis:</strong>
+                tuletame valemi <code>f(x) = @Model.Valem</code> ja saame
+                <code>f'(x) = @Model.Tuletis</code>.
+            </li>
+            <li>
+                <strong>Kriitilised punktid:</strong>
+                lahendame <code>f'(x) = 0</code>. Tulemus: @Model.KriitilisedPunktid.
+            </li>
+            <li>
+                <strong>Ekstreemumid:</strong>
+                kontrollime tuletise märgi muutumist. Tulemus: @Model.Ekstreemumid.
+            </li>
+        </ol>
+    </section>
+
+
     <div class="graph-card">
 
         <div class="graph-header">
@@ -159,13 +189,11 @@
             </div>
 
             <h2>
-                Funktsioon ja tuletis
+                Funktsiooni graafik
             </h2>
 
             <p>
-                Graafikul on näidatud funktsioon
-                <strong>f(x)</strong> ja selle tuletis
-                <strong>f′(x)</strong>.
+                Graafikul on näidatud <strong>f(x)</strong> vahemikus [-5; 5].
             </p>
 
         </div>
@@ -208,10 +236,6 @@
         const funktsiooniPunktid =
             @Html.Raw(ViewBag.FunktsiooniPunktid);
 
-        const tuletisePunktid =
-            @Html.Raw(ViewBag.TuletisePunktid);
-
-
         const ctx =
             document.getElementById('funktsiooniGraafik');
 
@@ -226,43 +250,15 @@
 
                     labels: xVaartused,
 
-                    datasets: [
-
-                        {
-                            label: 'f(x)',
-
-                            borderColor: '#327d79',
-
-                            data: funktsiooniPunktid,
-
-                            borderWidth: 2.5,
-
-                            pointRadius: 0,
-
-                            tension: 0.1,
-
-                            spanGaps: false
-                        },
-
-                        {
-                            label: "f'(x)",
-
-                            borderColor: '#c65b3d',
-
-                            data: tuletisePunktid,
-
-                            borderWidth: 2,
-
-                            borderDash: [7, 5],
-
-                            pointRadius: 0,
-
-                            tension: 0.1,
-
-                            spanGaps: false
-                        }
-
-                    ]
+                    datasets: [{
+                        label: 'f(x)',
+                        borderColor: '#327d79',
+                        data: funktsiooniPunktid,
+                        borderWidth: 2.5,
+                        pointRadius: 0,
+                        tension: 0.1,
+                        spanGaps: false
+                    }]
 
                 },
 
@@ -511,6 +507,46 @@
     }
 
 
+    .solution-card {
+        margin: 25px 0;
+        padding: 24px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+    }
+
+
+    .solution-card h2 {
+        margin: 0 0 15px;
+        font-size: 24px;
+    }
+
+
+    .solution-steps {
+        margin: 0;
+        padding-left: 22px;
+    }
+
+
+    .solution-steps li {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
+        line-height: 1.6;
+    }
+
+
+    .solution-steps li:last-child {
+        border-bottom: 0;
+    }
+
+
+    .solution-steps span {
+        display: block;
+        color: var(--muted);
+        font-size: 14px;
+    }
+
+
     .graph-header {
         margin-bottom: 20px;
     }
@@ -581,6 +617,11 @@
 
         .graph-card {
             padding: 15px;
+        }
+
+
+        .solution-card {
+            padding: 16px;
         }
     }
 

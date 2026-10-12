@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text.RegularExpressions;
 using MathNet.Symbolics;
 using Expr = MathNet.Symbolics.SymbolicExpression;
 using FunctionModel = FunktsiooniUurimine.Models.FunktsiooniUurimine;
@@ -21,7 +22,7 @@ public class MatemaatikaService
 
         try
         {
-            Expr avaldis = Expr.Parse(uurimine.Valem);
+            Expr avaldis = LoeAvaldis(uurimine.Valem);
             Func<double, double> funktsioon = avaldis.Compile("x");
             Expr tuletiseAvaldis = avaldis.Differentiate("x");
             Func<double, double> tuletis = tuletiseAvaldis.Compile("x");
@@ -44,7 +45,7 @@ public class MatemaatikaService
     {
         try
         {
-            Expr avaldis = Expr.Parse(valem);
+            Expr avaldis = LoeAvaldis(valem);
             if (arvutaTuletis)
             {
                 avaldis = avaldis.Differentiate("x");
@@ -177,7 +178,7 @@ public class MatemaatikaService
             }
 
             double y = punktid[i].Y.GetValueOrDefault();
-            if (Math.Abs(y) < NulliTapsus)
+            if (y == 0)
             {
                 LisaNull(nullid, punktid[i].X);
             }
@@ -232,7 +233,7 @@ public class MatemaatikaService
                 return null;
             }
 
-            if (Math.Abs(keskY.Value) < NulliTapsus)
+            if (keskY.Value == 0)
             {
                 return kesk;
             }
@@ -245,6 +246,11 @@ public class MatemaatikaService
             {
                 vasak = kesk;
                 vasakY = keskY;
+            }
+
+            if (parem - vasak < 0.0000000001)
+            {
+                break;
             }
         }
 
@@ -364,6 +370,14 @@ public class MatemaatikaService
         }
 
         return tulemused;
+    }
+
+    private Expr LoeAvaldis(string valem)
+    {
+        valem = Regex.Replace(valem, @"(?<=\d)\s*(?=x\b|\()", "*");
+        valem = Regex.Replace(valem, @"(?<=x)\s*(?=\()", "*");
+        valem = Regex.Replace(valem, @"(?<=\))\s*(?=[x\d(])", "*");
+        return Expr.Parse(valem);
     }
 
     private bool OnNullfunktsioon(Func<double, double> funktsioon)

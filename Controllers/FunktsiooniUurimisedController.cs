@@ -40,8 +40,6 @@ public class FunktsiooniUurimisedController : Controller
             Enumerable.Range(0, 101).Select(i => algus + i * samm));
         ViewBag.FunktsiooniPunktid = JsonSerializer.Serialize(
             _matemaatikaService.ArvutaGraafikuPunktid(uurimine.Valem, algus, lopp, samm));
-        ViewBag.TuletisePunktid = JsonSerializer.Serialize(
-            _matemaatikaService.ArvutaGraafikuPunktid(uurimine.Valem, algus, lopp, samm, true));
 
         return View(uurimine);
     }

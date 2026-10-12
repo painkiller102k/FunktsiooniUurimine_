@@ -2,19 +2,66 @@
     ViewData["Title"] = "Funktsioonide uurimine";
 }
 
-<div class="text-center py-5">
-    <h1>Funktsioonide uurimine</h1>
-    <p>Uuri funktsiooni omadusi ja vaata selle graafikut.</p>
+<section class="home-hero">
+    <div>
+        <p class="home-eyebrow">FUNKTSIOONI UURIMINE</p>
+        <h1>Leia funktsiooni tähtsad omadused</h1>
+        <p class="home-intro">
+            Vaata lihtsat juhendit, lisa oma valem ja tutvu arvutatud vastustega.
+        </p>
+        <div class="home-actions">
+            <a asp-controller="FunktsiooniUurimised"
+               asp-action="Create"
+               class="btn btn-primary">
+                Alusta uurimist
+            </a>
+            <a asp-controller="FunktsiooniUurimised"
+               asp-action="Index"
+               class="home-secondary-link">
+                Salvestatud funktsioonid
+            </a>
+        </div>
+    </div>
 
-    <a asp-controller="FunktsiooniUurimised"
-       asp-action="Index"
-       class="btn btn-primary">
-        Vaata funktsioone
-    </a>
+    <div class="home-example">
+        <p class="home-eyebrow">NÄIDE</p>
+        <p class="example-formula">f(x) = x² - 4x + 3</p>
+        <p>Nullkohad: <strong>x = 1 ja x = 3</strong></p>
+        <p>Tuletis: <strong>f'(x) = 2x - 4</strong></p>
+        <p class="example-result">Miinimum: <strong>(2; -1)</strong></p>
+    </div>
+</section>
 
-    <a asp-controller="FunktsiooniUurimised"
-       asp-action="Create"
-       class="btn btn-outline-secondary">
-        Lisa funktsioon
-    </a>
-</div>
+<section class="theory-section">
+    <div class="theory-heading">
+        <p class="home-eyebrow">TÖÖKÄIK</p>
+        <h2>Kuidas funktsiooni uurida?</h2>
+    </div>
+
+    <ol class="theory-steps">
+        <li>
+            <h3>Määramispiirkond</h3>
+            <p>Leia, milliste x väärtuste korral saab avaldist arvutada. Näiteks murd ei tohi jagada nulliga.</p>
+        </li>
+        <li>
+            <h3>Nullkohad</h3>
+            <p>Pane <code>f(x) = 0</code> ja lahenda saadud võrrand. Vastused on graafiku lõikepunktid x-teljega.</p>
+        </li>
+        <li>
+            <h3>Tuletis</h3>
+            <p>Leia <code>f'(x)</code>. Astme tuletamisel kehtib reegel <code>(xⁿ)' = n·xⁿ⁻¹</code>.</p>
+        </li>
+        <li>
+            <h3>Kriitilised punktid</h3>
+            <p>Lahenda <code>f'(x) = 0</code> ja kontrolli, kas tuletis on selles punktis olemas.</p>
+        </li>
+        <li>
+            <h3>Ekstreemumid</h3>
+            <p>Vaata, kas tuletise märk kriitilises punktis muutub. Märgi muutus näitab maksimumi või miinimumi.</p>
+        </li>
+        <li>
+            <h3>Graafik</h3>
+            <p>Kasuta nullkohti, ekstreemumeid ja määramispiirkonda, et graafiku kuju kontrollida.</p>
+        </li>
+    </ol>
+</section>
