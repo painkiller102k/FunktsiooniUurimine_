@@ -50,4 +50,4 @@ Andmebaas kasutab SQLite'i. Rakenduse käivitamisel rakendatakse andmebaasi migr
 4. Salvesta funktsioon ja vaata tulemusi.
 5. Tulemuste lehel näed arvutusi, samm-sammulist selgitust ja funktsiooni graafikut.
 
-Nullkohtade ja kriitiliste punktide otsimine toimub praegu ligikaudselt vahemikus `[-10; 10]`. Seetõttu võivad sellest vahemikust väljaspool olevad punktid jääda leidmata.
+## Martin Rossakov
