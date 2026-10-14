@@ -1,3 +1,5 @@
+@using FunktsiooniUurimine.Models
+
 @{
     ViewData["Title"] = "Funktsioonide uurimine";
 }
@@ -5,31 +7,24 @@
 <section class="home-hero">
     <div>
         <p class="home-eyebrow">FUNKTSIOONI UURIMINE</p>
-        <h1>Leia funktsiooni tähtsad omadused</h1>
+        <h1>Uuri funktsiooni lihtsalt ja kiiresti</h1>
         <p class="home-intro">
-            Vaata lihtsat juhendit, lisa oma valem ja tutvu arvutatud vastustega.
+            Sisesta valem, võta märgid üksiku klõpsuga ja näe kohe määramispiirkonda, nullkohti, tuletist ja graafikut.
         </p>
         <div class="home-actions">
             <a asp-controller="FunktsiooniUurimised"
                asp-action="Create"
                class="btn btn-primary">
-                Alusta uurimist
+                Alusta kohe
             </a>
             <a asp-controller="FunktsiooniUurimised"
                asp-action="Index"
                class="home-secondary-link">
-                Salvestatud funktsioonid
+                Vaata salvestatud funktsioone
             </a>
         </div>
     </div>
 
-    <div class="home-example">
-        <p class="home-eyebrow">NÄIDE</p>
-        <p class="example-formula">f(x) = x² - 4x + 3</p>
-        <p>Nullkohad: <strong>x = 1 ja x = 3</strong></p>
-        <p>Tuletis: <strong>f'(x) = 2x - 4</strong></p>
-        <p class="example-result">Miinimum: <strong>(2; -1)</strong></p>
-    </div>
 </section>
 
 <section class="theory-section">

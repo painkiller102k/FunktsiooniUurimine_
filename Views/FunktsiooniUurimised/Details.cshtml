@@ -1,4 +1,5 @@
-﻿@model global::FunktsiooniUurimine.Models.FunktsiooniUurimine
+﻿@using FunktsiooniUurimine.Models
+@model global::FunktsiooniUurimine.Models.FunktsiooniUurimine
 
 @{
     ViewData["Title"] = "Funktsiooni detailid";
@@ -16,8 +17,8 @@
 
             <h1>Funktsiooni uurimine</h1>
 
-            <p class="function-formula">
-                f(x) = @Model.Valem
+            <p class="function-formula math-display">
+                f(x) = @Html.Raw(MathDisplayFormatter.Format(Model.Valem))
             </p>
 
         </div>
@@ -76,8 +77,8 @@
                     Nullkohad
                 </div>
 
-                <div class="result-value">
-                    @Model.Nullkohad
+                <div class="result-value math-display">
+                    @Html.Raw(MathDisplayFormatter.Format(Model.Nullkohad))
                 </div>
 
             </div>
@@ -97,8 +98,8 @@
                     Tuletis
                 </div>
 
-                <div class="result-value">
-                    f'(x) = @Model.Tuletis
+                <div class="result-value math-display">
+                    f′(x) = @Html.Raw(MathDisplayFormatter.Format(Model.Tuletis))
                 </div>
 
             </div>
@@ -160,13 +161,13 @@
             </li>
             <li>
                 <strong>Nullkohad:</strong>
-                lahendame võrrandi <code>f(x) = 0</code>. Tulemus: @Model.Nullkohad.
+                lahendame võrrandi <code>f(x) = 0</code>. Tulemus: @Html.Raw(MathDisplayFormatter.Format(Model.Nullkohad)).
                 <span>Nullkohti otsitakse ligikaudselt vahemikus [-10; 10].</span>
             </li>
             <li>
                 <strong>Tuletis:</strong>
-                tuletame valemi <code>f(x) = @Model.Valem</code> ja saame
-                <code>f'(x) = @Model.Tuletis</code>.
+                tuletame valemi <code>f(x) = @Html.Raw(MathDisplayFormatter.Format(Model.Valem))</code> ja saame
+                <code>f′(x) = @Html.Raw(MathDisplayFormatter.Format(Model.Tuletis))</code>.
             </li>
             <li>
                 <strong>Kriitilised punktid:</strong>
@@ -239,6 +240,12 @@
         const ctx =
             document.getElementById('funktsiooniGraafik');
 
+        const graafikuVaartused =
+            funktsiooniPunktid.filter(value => value !== null && Number.isFinite(value));
+
+        const minY = Math.min(...graafikuVaartused);
+        const maxY = Math.max(...graafikuVaartused);
+        const yPadding = ((maxY - minY) || 1) * 0.2;
 
         if (ctx && typeof Chart !== 'undefined') {
 
@@ -266,6 +273,7 @@
                 options: {
 
                     responsive: true,
+                    maintainAspectRatio: false,
 
                     interaction: {
 
@@ -282,13 +290,24 @@
 
                             display: true,
 
-                            position: 'top'
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                pointStyle: 'line',
+                                boxWidth: 10,
+                                color: '#22313f'
+                            }
 
                         },
 
                         tooltip: {
 
-                            enabled: true
+                            enabled: true,
+                            backgroundColor: '#1d3557',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            borderColor: '#ff8a5b',
+                            borderWidth: 1
 
                         }
 
@@ -298,32 +317,50 @@
                     scales: {
 
                         x: {
-
+                            min: -5,
+                            max: 5,
+                            grid: {
+                                color: 'rgba(29, 53, 87, 0.08)'
+                            },
                             title: {
 
                                 display: true,
 
-                                text: 'x'
+                                text: 'x',
+                                color: '#22313f',
+                                font: {
+                                    weight: '700'
+                                }
 
                             },
 
                             ticks: {
-
-                                maxTicksLimit: 11
-
+                                maxTicksLimit: 11,
+                                color: '#5f6f7d'
                             }
 
                         },
 
 
                         y: {
-
+                            min: minY - yPadding,
+                            max: maxY + yPadding,
+                            grid: {
+                                color: 'rgba(29, 53, 87, 0.08)'
+                            },
                             title: {
 
                                 display: true,
 
-                                text: 'y'
+                                text: 'y',
+                                color: '#22313f',
+                                font: {
+                                    weight: '700'
+                                }
 
+                            },
+                            ticks: {
+                                color: '#5f6f7d'
                             }
 
                         }
@@ -356,6 +393,11 @@
         align-items: flex-start;
         gap: 25px;
         margin-bottom: 30px;
+        background: linear-gradient(135deg, #f8fafb 0%, #eef5f4 100%);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 24px 26px;
+        box-shadow: 0 10px 22px rgba(41, 53, 65, 0.06);
     }
 
 
@@ -376,10 +418,15 @@
 
 
     .function-formula {
-        margin: 10px 0 0;
-        color: var(--muted);
-        font-size: 18px;
-        font-weight: 500;
+        margin: 12px 0 0;
+        color: var(--ink);
+        font-size: 1.2rem;
+        font-weight: 700;
+        display: inline-block;
+        background: rgba(198, 91, 61, 0.08);
+        border: 1px solid rgba(198, 91, 61, 0.12);
+        border-radius: 12px;
+        padding: 12px 16px;
     }
 
 
@@ -453,11 +500,18 @@
         display: flex;
         align-items: flex-start;
         gap: 15px;
-        background: var(--surface);
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%);
         border: 1px solid var(--line);
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+        border-left: 4px solid var(--accent);
+        border-radius: 12px;
+        padding: 18px 20px;
+        box-shadow: 0 8px 16px rgba(41, 53, 65, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .result-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 20px rgba(41, 53, 65, 0.08);
     }
 
 
@@ -467,10 +521,10 @@
 
 
     .result-icon {
-        width: 44px;
-        height: 44px;
-        min-width: 44px;
-        border-radius: 10px;
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+        border-radius: 12px;
         background: var(--accent-soft);
         color: var(--accent);
         display: flex;
@@ -499,20 +553,21 @@
 
 
     .graph-card {
-        background: white;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%);
         border: 1px solid var(--line);
-        border-radius: 8px;
+        border-radius: 16px;
         padding: 25px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 22px rgba(41, 53, 65, 0.05);
     }
 
 
     .solution-card {
         margin: 25px 0;
         padding: 24px;
-        background: var(--surface);
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%);
         border: 1px solid var(--line);
-        border-radius: 8px;
+        border-radius: 16px;
+        box-shadow: 0 8px 18px rgba(41, 53, 65, 0.04);
     }
 
 

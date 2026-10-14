@@ -1,19 +1,57 @@
 :root {
-    --page: #f2f5f6;
+    --page: #f5f7fb;
     --surface: #ffffff;
-    --ink: #293541;
-    --muted: #65727e;
-    --nav: #293541;
-    --accent: #c65b3d;
-    --accent-hover: #a94730;
-    --accent-soft: #faeae5;
-    --line: #d9e0e4;
-    --danger: #b83e4b;
+    --ink: #22313f;
+    --muted: #5f6f7d;
+    --nav: #1d3557;
+    --nav-alt: #2d5d7a;
+    --accent: #ff8a5b;
+    --accent-hover: #e56f3e;
+    --accent-soft: #fff1ea;
+    --line: #dfe7ee;
+    --danger: #ef5c6c;
+    --success: #4ea57d;
+    --warning: #f2b75b;
+    --math: #294d66;
+    --shadow: rgba(29, 53, 87, 0.08);
 }
 
 html {
     font-size: 16px;
     min-height: 100%;
+}
+
+.math-display,
+.math-display sup,
+.math-display .math-root {
+    font-family: "Segoe UI Symbol", "Times New Roman", serif;
+}
+
+.math-display {
+    color: var(--math);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.math-display sup {
+    font-size: 0.72em;
+    vertical-align: super;
+    color: var(--accent-hover);
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.math-display .math-root {
+    display: inline-block;
+    margin-right: 2px;
+    color: var(--accent);
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.math-display code,
+.math-display strong {
+    color: inherit;
 }
 
 body {
@@ -24,7 +62,8 @@ body {
 }
 
 .main-navbar {
-    background: var(--nav);
+    background: linear-gradient(135deg, var(--nav) 0%, var(--nav-alt) 100%);
+    box-shadow: 0 8px 18px rgba(29, 53, 87, 0.12);
 }
 
 .main-navbar .nav-link {
@@ -32,7 +71,7 @@ body {
 }
 
 .main-navbar .nav-link:hover {
-    color: #ffc7ad;
+    color: #ffd4bf;
 }
 
 .main-content {
@@ -94,16 +133,59 @@ body {
     box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
+.formula-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    background: linear-gradient(180deg, #f8fafb 0%, #eef3f4 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.formula-symbol-btn {
+    min-width: 52px;
+    border: 1px solid #d5dde2;
+    background: #ffffff;
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 1px 0 rgba(17, 24, 39, 0.04);
+}
+
+.formula-symbol-btn:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.formula-symbol-btn:active {
+    transform: translateY(0);
+}
+
+.formula-symbol-btn--wide {
+    min-width: 64px;
+}
+
 .graph-container {
     background: var(--surface);
     padding: 16px;
     margin-top: 16px;
     border: 1px solid var(--line);
     border-radius: 8px;
+    height: 480px;
 }
 
 .graph-container canvas {
     width: 100% !important;
+    height: 100% !important;
     max-height: 500px;
 }
 
@@ -143,9 +225,10 @@ body {
     gap: 32px;
     margin: 20px 0 40px;
     padding: 36px;
-    background: var(--nav);
-    border-radius: 8px;
+    background: linear-gradient(135deg, var(--nav) 0%, var(--nav-alt) 100%);
+    border-radius: 16px;
     color: white;
+    box-shadow: 0 18px 30px rgba(29, 53, 87, 0.12);
 }
 
 .home-hero h1 {
@@ -180,9 +263,11 @@ body {
 
 .home-example {
     padding: 22px;
-    background: #374858;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.10);
     border-left: 4px solid var(--accent);
-    border-radius: 6px;
+    border-radius: 12px;
+    backdrop-filter: blur(2px);
 }
 
 .example-formula {
@@ -225,9 +310,10 @@ body {
 .theory-steps li {
     min-height: 150px;
     padding: 18px;
-    background: var(--surface);
+    background: linear-gradient(180deg, #ffffff 0%, #f6f9fb 100%);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 14px;
+    box-shadow: 0 8px 16px var(--shadow);
     counter-increment: steps;
 }
 

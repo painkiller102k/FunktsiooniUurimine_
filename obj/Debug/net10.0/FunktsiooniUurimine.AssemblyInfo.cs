@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FunktsiooniUurimine")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d36964d132a5ebae73603c33e4ed9544fcbd7ab")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+31c888fafc2a814510b168efea4afa3df2f2ed44")]
 [assembly: System.Reflection.AssemblyProductAttribute("FunktsiooniUurimine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FunktsiooniUurimine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

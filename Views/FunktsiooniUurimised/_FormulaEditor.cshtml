@@ -2,8 +2,58 @@
 
 <div class="form-group">
     <label asp-for="Valem">Funktsioon f(x)</label>
+
+    <div class="formula-toolbar" aria-label="Valemi märgid">
+        <button type="button" class="formula-symbol-btn" data-insert="x^2" title="x²">x²</button>
+        <button type="button" class="formula-symbol-btn" data-insert="x^3" title="x³">x³</button>
+        <button type="button" class="formula-symbol-btn" data-insert="sqrt(x)" title="sqrt(x)">√x</button>
+        <button type="button" class="formula-symbol-btn" data-insert="sin(x)" title="sin(x)">sin</button>
+        <button type="button" class="formula-symbol-btn" data-insert="cos(x)" title="cos(x)">cos</button>
+        <button type="button" class="formula-symbol-btn formula-symbol-btn--wide" data-insert="(x)" title="(x)">( )</button>
+        <button type="button" class="formula-symbol-btn formula-symbol-btn--wide" data-insert="*" title="Korrutis">·</button>
+        <button type="button" class="formula-symbol-btn" data-insert="/" title="Jagamine">÷</button>
+        <button type="button" class="formula-symbol-btn" data-insert="-" title="Miinus">−</button>
+        <button type="button" class="formula-symbol-btn" data-insert="+" title="Pluss">+</button>
+    </div>
+
     <input asp-for="Valem" class="form-control formula-input"
             placeholder="Näiteks x^2-4x+3" autocomplete="off" />
     <span asp-validation-for="Valem" class="text-danger"></span>
-        <div class="form-text">Võid kirjutada ka x^2-4x+3 või x^3-3*x. Toetatud on ka sin(x), sqrt(x) ja 1/x.</div>
+    <div class="form-text math-display">
+        Võid sisestada valemi klaviatuurilt või kasutada ülalolevaid märgiklahve.
+        Näited: <span>x<sup>2</sup> - 4x + 3</span>, <span>x<sup>3</sup> - 3x</span>, <span>√x</span>, <span>sin(x)</span>.
+    </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const formulaInputs = document.querySelectorAll('.formula-input');
+        const symbolButtons = document.querySelectorAll('.formula-symbol-btn');
+
+        symbolButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                const insertText = button.dataset.insert;
+                const input = button.closest('.form-group')?.querySelector('.formula-input');
+
+                if (!input) return;
+
+                const start = input.selectionStart ?? input.value.length;
+                const end = input.selectionEnd ?? input.value.length;
+                const value = input.value;
+                input.value = value.slice(0, start) + insertText + value.slice(end);
+
+                const caretPos = start + insertText.length;
+                input.focus();
+                input.setSelectionRange(caretPos, caretPos);
+            });
+        });
+
+        formulaInputs.forEach(function (input) {
+            input.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                }
+            });
+        });
+    });
+</script>
