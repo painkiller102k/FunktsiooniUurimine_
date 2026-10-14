@@ -49,5 +49,3 @@ Andmebaas kasutab SQLite'i. Rakenduse käivitamisel rakendatakse andmebaasi migr
 3. Sisesta valem muutujaga `x`. Näiteks: `x^3 - 6*x + 3`.
 4. Salvesta funktsioon ja vaata tulemusi.
 5. Tulemuste lehel näed arvutusi, samm-sammulist selgitust ja funktsiooni graafikut.
-
-## Martin Rossakov
