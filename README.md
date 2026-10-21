@@ -29,8 +29,8 @@ Rakenduse käivitamiseks tuleb paigaldada [.NET 10 SDK](https://dotnet.microsoft
 2. Ava terminal ja mine projekti kausta:
 
    ```bash
-   git clone (https://github.com/painkiller102k/FunktsiooniUurimine_)
-   cd FunktsiooniUurimine
+   git clone https://github.com/painkiller102k/FunktsiooniUurimine_
+   cd FunktsiooniUurimine_
    ```
 
 3. Käivita rakendus:
