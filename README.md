@@ -29,7 +29,7 @@ Rakenduse käivitamiseks tuleb paigaldada [.NET 10 SDK](https://dotnet.microsoft
 2. Ava terminal ja mine projekti kausta:
 
    ```bash
-   git clone https://github.com/GummyisHear/FunctionExplorer.git
+   git clone [https://github.com/GummyisHear/FunctionExplorer.git](https://github.com/painkiller102k/FunktsiooniUurimine_)
    cd FunktsiooniUurimine
    ```
 
